@@ -18,7 +18,7 @@ function Header(){
     </header>
   );
 }
-function CoreConcepts(props){
+function CoreConcepts({title,description,image}){ //destructuring
   return (
     <li>
       <img src={props.image} alt="..." />
