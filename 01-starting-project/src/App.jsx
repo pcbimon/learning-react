@@ -21,9 +21,9 @@ function Header(){
 function CoreConcepts({title,description,image}){ //destructuring
   return (
     <li>
-      <img src={props.image} alt="..." />
-      <h3>{props.title}</h3>
-      <p>{props.description}</p>
+      <img src={title} alt="..." />
+      <h3>{description}</h3>
+      <p>{image}</p>
     </li>
   )
 }
