@@ -1,6 +1,6 @@
 import './CoreConcept.css';
 
-export default function CoreConcepts({title,description,image}){ //destructuring
+export default function CoreConcept({title,description,image}){ //destructuring
     return (
       <li>
         <img src={image} alt="..." />
