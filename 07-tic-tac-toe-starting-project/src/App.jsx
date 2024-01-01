@@ -16,23 +16,16 @@ const initalGameBoard = [
   [null, null, null], 
   [null, null, null]
 ];
-function App() {
-  const [players, setPlayers] = useState({
-    X: 'Player 1',
-    O: 'Player 2'
-  });
-  const [gameTurns, setGameTurn] = useState([]);
-  // const [hasWinner, setHasWinner] = useState(false);
-  //const [activePlayer,setActivePlayer] = useState('X');
-  let activePlayer = deriveActivePlayer(gameTurns);
-  //not referentially equal to initalGameBoard
-  let gameBoard = [...initalGameBoard.map(row => [...row])];
-    for (const turn of gameTurns) {
-        const {square, player} = turn;
-        const {row, col} = square;
-        gameBoard[row][col] = player;
-    }
-  let winner;
+function deriveGameBoard(gameTurns){
+  const gameBoard = [...initalGameBoard.map(row => [...row])];
+  for (const turn of gameTurns) {
+      const {square, player} = turn;
+      const {row, col} = square;
+      gameBoard[row][col] = player;
+  }
+  return gameBoard;
+}
+function deriveWinner(gameBoard,players){
   for(const combination of WINNING_COMBINATIONS){
     const firstSquareSymbol = gameBoard[combination[0].row][combination[0].column];
     const secondSquareSymbol= gameBoard[combination[1].row][combination[1].column];
@@ -41,9 +34,19 @@ function App() {
       firstSquareSymbol === secondSquareSymbol && 
       firstSquareSymbol === thirdSquareSymbol){
       winner = players[firstSquareSymbol];
-      break;
     }
   }
+  return winner;
+}
+function App() {
+  const [players, setPlayers] = useState({
+    X: 'Player 1',
+    O: 'Player 2'
+  });
+  const [gameTurns, setGameTurn] = useState([]);
+  let activePlayer = deriveActivePlayer(gameTurns);
+  let gameBoard = deriveGameBoard(gameTurns);
+  const winner = deriveWinner(gameBoard,players);
   const hasDraw = gameTurns.length === 9 && !winner;
   function handleSelectSquare(rowIndex, colIndex) {
     //setActivePlayer((curActivePlayer)=>(curActivePlayer === 'X' ? 'O' : 'X'));
