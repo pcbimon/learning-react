@@ -15,7 +15,7 @@ export default function Player({initalName, symbol}) {
     }
     return (
         <li>
-            <span class="player">
+            <span className="player">
                 {editablePlayerName}
                 <span className="player-symbo">{symbol}</span>
             </span>
