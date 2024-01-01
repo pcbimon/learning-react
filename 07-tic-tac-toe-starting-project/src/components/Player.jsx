@@ -1,5 +1,5 @@
 import { useState } from 'react';
-export default function Player({initalName, symbol}) {
+export default function Player({initalName, symbol, isActive}) {
     const [playerName, setPlayerName] = useState(initalName);
     const [isEditing, setIsEditing] = useState(false);
     function handleEditClick(){
@@ -14,7 +14,7 @@ export default function Player({initalName, symbol}) {
         editablePlayerName = <input type="text" required defaultValue={playerName} onChange={handleChange}/>;
     }
     return (
-        <li>
+        <li className={isActive ? 'active' : undefined}>
             <span className="player">
                 {editablePlayerName}
                 <span className="player-symbo">{symbol}</span>
